@@ -1,0 +1,35 @@
+CHIP A6Q212345 {
+    IN a, b, c, d;
+    OUT f;
+    
+    PARTS:
+        Not(in=a, out=Na);
+        Not(in=b, out=Nb);
+        Not(in=c, out=Nc);
+        Not(in=d, out=Nd);
+        
+        And(a=Na, b=Nb, out=tmp1);
+        And(a=tmp1, b=Nc, out=tmp2);
+        And(a=tmp2, b=d, out=m1);
+        
+        And(a=Na, b=b, out=tmp3);
+        And(a=tmp3, b=Nc, out=tmp4);
+        And(a=tmp4, b=Nd, out=m2);
+        
+        And(a=Na, b=b, out=tmp5);
+        And(a=tmp5, b=c, out=tmp6);
+        And(a=tmp6, b=Nd, out=m3);
+        
+        And(a=a, b=Nb, out=tmp7);
+        And(a=tmp7, b=c, out=tmp8);
+        And(a=tmp8, b=Nd, out=m4);
+        
+        And(a=a, b=b, out=tmp9);
+        And(a=tmp9, b=Nc, out=tmp10);
+        And(a=tmp10, b=d, out=m5);
+        
+        Or(a=m1, b=m2, out=tmp11);
+        Or(a=tmp11, b=m3, out=tmp12);
+        Or(a=tmp12, b=m4, out=tmp13);
+        Or(a=tmp13, b=m5, out=f);
+}
